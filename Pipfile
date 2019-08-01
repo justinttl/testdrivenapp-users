@@ -1,0 +1,24 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
+pytest-html = "*"
+pytest-report = "*"
+bandit = "*"
+black = "==19.3b0"
+flake8 = "*"
+mypy = "*"
+pydocstyle = "*"
+pylint = "*"
+sphinx = "*"
+
+[packages]
+flask = "==1.0.2"
+Flask-RESTful = "==0.3.7"
+
+[requires]
+python_version = "3.7"
