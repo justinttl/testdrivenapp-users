@@ -1,0 +1,12 @@
+.dockerignore
+.editorconfig
+.env
+.git
+.gitignore
+.mypy_cache
+.pytest_cache
+.venv
+.vscode
+Dockerfile
+Dockerfile-prod
+setup.cfg
