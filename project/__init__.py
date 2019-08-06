@@ -4,6 +4,7 @@ import os
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+
 from project.api.users import users_blueprint
 
 db = SQLAlchemy()
