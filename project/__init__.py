@@ -2,46 +2,31 @@
 
 import os
 
-from flask import Flask, jsonify
-from flask_restful import Api, Resource
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from project.api.users import users_blueprint
 
-# Setup app
-app = Flask(__name__)
-api = Api(app)
-
-
-# Set config and db connections
-app.config.from_object("project.config.DevelopmentConfig")
-app_settings = os.getenv("APP_SETTINGS")
-app.config.from_object(app_settings)
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 
-# Model Definition
-class User(db.Model):  # type: ignore
-    """User Model."""
+def create_app(script_info=None):
+    """Create a flask app through factory pattern."""
+    # App
+    app = Flask(__name__)
 
-    __tablename__ = "users"
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(128), nullable=False)
-    email = db.Column(db.String(128), nullable=False)
-    active = db.Column(db.Boolean(), default=True, nullable=False)
+    # Set configuration
+    app_settings = os.getenv("APP_SETTINGS")
+    app.config.from_object(app_settings)
 
-    def __init__(self, username, email):
-        """Initialize a user object."""
-        self.username = username
-        self.email = email
+    # Extensions
+    db.init_app(app)
 
+    # Blueprints
+    app.register_blueprint(users_blueprint)
 
-# User View
-class UserPing(Resource):
-    """User Ping model."""
+    # Shell context for flask cli
+    @app.shell_context_processor
+    def ctx():
+        return {"app": app, "db": db}
 
-    def get(self):
-        """Get a pong back."""
-        return {"status": "success", "message": "pong!"}
-
-
-# Routes
-api.add_resource(UserPing, "/users/ping")
+    return app

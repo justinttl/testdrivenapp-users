@@ -38,7 +38,7 @@
     "python.linting.flake8Enabled": false,
     "python.linting.mypyEnabled": true,
     "python.linting.pydocstyleEnabled": true,
-    "python.linting.pylintEnabled": true,
+    "python.linting.pylintEnabled": false,
     "python.testing.unittestEnabled": true,
     "python.testing.nosetestsEnabled": false,
     "python.testing.pytestEnabled": false,
